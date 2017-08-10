@@ -1,0 +1,9 @@
+J:\blackjack\vad_core\vad_core\bin\Debug\netcoreapp1.1\vad_core.deps.json
+J:\blackjack\vad_core\vad_core\bin\Debug\netcoreapp1.1\vad_core.runtimeconfig.json
+J:\blackjack\vad_core\vad_core\bin\Debug\netcoreapp1.1\vad_core.runtimeconfig.dev.json
+J:\blackjack\vad_core\vad_core\bin\Debug\netcoreapp1.1\vad_core.dll
+J:\blackjack\vad_core\vad_core\obj\Debug\netcoreapp1.1\vad_core.csprojResolveAssemblyReference.cache
+J:\blackjack\vad_core\vad_core\obj\Debug\netcoreapp1.1\vad_core.AssemblyInfo.cs
+J:\blackjack\vad_core\vad_core\bin\Debug\netcoreapp1.1\vad_core.pdb
+J:\blackjack\vad_core\vad_core\obj\Debug\netcoreapp1.1\vad_core.dll
+J:\blackjack\vad_core\vad_core\obj\Debug\netcoreapp1.1\vad_core.pdb
