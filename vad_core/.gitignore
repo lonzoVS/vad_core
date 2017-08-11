@@ -1,1 +1,3 @@
-/wwwroot/uploads/*
+obj/
+bin/
+wwwroot/uploads
