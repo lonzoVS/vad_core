@@ -66,38 +66,19 @@
 <h2>File upload</h2>
 <div>
     <form id="form4" name="form3" action="/uploader" enctype="multipart/form-data" method="post">
-    <div class="buttons">
-        <div class="upload-button">
-            <div class="label">Upload file...</div>
-            <input id="files" name="files" type="file" onchange="uploadFiles('files');" />
+        <div class="buttons">
+            <div class="upload-button">
+                <div class="label">Upload file...</div>
+                <input id="files" name="files" type="file" onchange="uploadFiles('files');" />
+            </div>
         </div>
-    </div>
-</form></div>
+    </form>
+</div>
 
 <div id="myBar" class="ldBar" data-value="0"></div>
 
  @section scripts {
     <script src="~/lib/signalr/jquery.signalR.min.js"></script>
-  
     <script src="signalr/hubs"></script>
-
-    <script type="text/javascript">
-        $(function () {
-            var connectionId = null;
-            // Declare a proxy to reference the hub.
-            var pr = $.connection.progressHub;
-            // Create a function that the hub can call to broadcast messages.
-            pr.client.addProgress = function (percentage) {
-                var bar1 = document.getElementById('myBar').ldBar;
-                bar1.set(parseInt(percentage));
-            };
-    
-           
-            // Start the connection.
-            $.connection.hub.start( { waitForPageLoad: false } ).done(function () {
-                connectionId = $.connection.hub.id;
-                console.log(connectionId);
-            });
-        });
-    </script>
+    <script src="~/js/progressbarhub.js"></script>
 }

@@ -21,9 +21,16 @@ namespace vad_core.ClientsRepo
             clients.AddClient(ip, client);
         }
 
-        public void Delete(Client client)
+        public void Delete(string clientInfo)
         {
-            clients.DeleteClient(client);
+            clients.DeleteClient(clientInfo);
         }
+
+        public int Count()
+        {
+            return clients.Count();
+          
+        }
+   
     }
 }

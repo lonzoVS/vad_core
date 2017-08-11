@@ -17,32 +17,28 @@ namespace vad_core.Hubs
     [HubName("progressHub")]
     public class ProgressHub : Hub
     {
-        //public static ConcurrentDictionary<string, string> MyUsers = new ConcurrentDictionary<string, string>();
 
         public override Task OnConnected()
         {
-            
             var ip = Context.Request.HttpContext.Connection.RemoteIpAddress.ToString();
-            //MyUsers.TryAdd(ip, Context.ConnectionId);
             var clients = new ClientsRepoHelper(RepositoryIsolator.Of.Clients);
             clients.Add(ip, new Client(Context.ConnectionId, Context.User.Identity.Name));
-            //string name = Context.User.Identity.Name;
-            
-            // Groups.Add(Context.ConnectionId, "lul" + j);
-
+            System.Diagnostics.Debug.WriteLine(clients.Count());
             return base.OnConnected();
         }
-        public class MyUserType
+        //I'm not sure this is going to work in the same browser with two tabs in deploy, need to test it.
+        public override Task OnDisconnected(bool stopCalled)
         {
-            public string ConnectionId { get; set; }
-            public string UserName { get; set; }
-
+            var clients = new ClientsRepoHelper(RepositoryIsolator.Of.Clients);
+            clients.Delete(Context.ConnectionId);
+            System.Diagnostics.Debug.WriteLine(clients.Count());
+            return base.OnDisconnected(stopCalled);
         }
-        //public void SendToHub<T>(T arg)
-        //{
-        //    //  var hubContext = connectionManager.GetHubContext<ProgressHub>();
-        //    // hubContext.Clients.Client(hubContext.Clients.).AddProgress(arg);
-        //    Clients.Client(Context.ConnectionId).AddProgress(arg);
-        //}
+  
+        public override Task OnReconnected()
+        {
+            return base.OnReconnected();
+        }
+
     }
 }

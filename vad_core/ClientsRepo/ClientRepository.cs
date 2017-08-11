@@ -24,11 +24,13 @@ namespace vad_core.ClientsRepo
             if (client != null) Clients.TryAdd(info, client);
         }
 
-        public void DeleteClient(Client client)
+        public void DeleteClient(string clientId)
         {
-            //implement delete
+
+            var item = Clients.First(kvp => kvp.Value.Id == clientId);
+            ((IDictionary)Clients).Remove(item.Key);
         }
-        //or I can just acces name or id with enumarator.movenext cycle
+        //or I can just acces name or id through getenumarator.movenext cycle
         public string GetId(string ip)
         {
             return Clients[ip].Id;
@@ -37,5 +39,6 @@ namespace vad_core.ClientsRepo
         {
             return Clients[ip].UserName;
         }
+
     }
 }
