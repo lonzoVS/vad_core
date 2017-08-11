@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http.Features;
 using vad_core.Hubs;
 using vad_core.ClientsRepo;
 using vad_core.Validators;
+using Microsoft.AspNetCore.Mvc.Routing;
 //using vad_core.Hubs;
 //using vad_core.Hubs;
 
@@ -23,7 +24,6 @@ namespace vad_core.Controllers
 
         private IHostingEnvironment hostingEnvironment;
         private readonly IConnectionManager connectionManager;
-
         public UploaderController(IHostingEnvironment hostingEnvironment, IConnectionManager connMangr)
         {
             this.hostingEnvironment = hostingEnvironment;
@@ -42,13 +42,14 @@ namespace vad_core.Controllers
             filename = this.EnsureCorrectFilename(filename);
             IValidator validator = new AudioExtensionValidator();
             bool isExtensionValid =  validator.Validate(ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"'));
+            string fileServerPath = this.GetPathAndFilename(filename);
             if (isExtensionValid)
             {
 
 
                 byte[] buffer = new byte[16 * 1024];
 
-                using (FileStream output = System.IO.File.Create(this.GetPathAndFilename(filename)))
+                using (FileStream output = System.IO.File.Create(fileServerPath))
                 {
                     using (Stream input = files.OpenReadStream())
                     {
@@ -69,15 +70,27 @@ namespace vad_core.Controllers
                         }
                     }
 
-                }
+                    
 
-                return Json("success");
+                }
+                return Json(new { status = "success", filePath = fileServerPath });
             }
             else
             { 
-                return Json("wrong extension");
+                return Json(new { status = "error" });
             }
         }
+
+        //[HttpPost]
+        //public  IActionResult FileUploaded()
+        //{
+        //    System.Diagnostics.Debug.WriteLine(fileServerPath);
+        //    //var actionUrl = Url.Action("AudioProcess", "Process", new { filePath = fileServerPath });
+        //    //var urlHelper = HttpContext.Features.Get<IUrlHelper>();
+        //    //var actionUrl = urlHelper.Action("AudioProcess", "Process", new { filePath = fileServerPath });
+            
+
+        //}
 
         private string EnsureCorrectFilename(string filename)
         {

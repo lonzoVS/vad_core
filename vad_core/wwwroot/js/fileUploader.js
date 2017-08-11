@@ -19,12 +19,33 @@
             processData: false,
             contentType: false,
             type: "POST",
-            success: function (data) {
-               // console.log("file uploaded");
+            success: function (result) {
+                if (result.status === "success") {
+                    console.log(result.filePath);
+                    $.ajax({
+                        url: "/audioprocess/Process",
+                        type: "POST",
+                        data: JSON.stringify(result.filePath),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (result) {
+                            if (result.status === "error")
+                            {
+                                alert("File extension is not valid!");
+                            }
+                        },
+                        error: function () {
+                            alert('error');
+                        }
+                    });
+                }
+
+
             }
         }
     );
 }
+
 function getExtension(filename)
 {
     var re = /(?:\.([^.]+))?$/;

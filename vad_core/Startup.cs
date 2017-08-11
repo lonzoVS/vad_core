@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace vad_core
 {
@@ -30,6 +31,7 @@ namespace vad_core
         {
             // Add framework services.
             services.AddMvc();
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddSignalR();
             services.AddSignalR(options =>
             {
