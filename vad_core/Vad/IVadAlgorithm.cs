@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace vad_core.Vad
 {
-    public abstract class IVadAlgorithm
+    public interface IVadAlgorithm
     {
-        public double[] VadList { get; set; } 
-        abstract public void PerformVad(double[] samples);
+        double[] VadList { get; set; } 
+        void PerformVad(double[] samples);
     }
 }
