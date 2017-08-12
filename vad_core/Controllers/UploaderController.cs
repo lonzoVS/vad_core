@@ -27,7 +27,7 @@ namespace vad_core.Controllers
         public UploaderController(IHostingEnvironment hostingEnvironment, IConnectionManager connMangr)
         {
             this.hostingEnvironment = hostingEnvironment;
-            this.connectionManager = connMangr;
+            connectionManager = connMangr;
         }
 
         [HttpPost]

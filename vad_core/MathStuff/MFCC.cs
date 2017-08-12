@@ -97,7 +97,7 @@ namespace vad_core.MathStuff
                 for (int j = 0; j < N; j++)
                 {
                     dct[i] += logData[j] * Math.Cos(Math.PI * i * (j + 1.0 / 2.0) / N);
-                    //data[m] * cos(M_PI * n * (m + 1./2.) / length);
+                    
                 }
             }
 
