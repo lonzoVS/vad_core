@@ -89,12 +89,11 @@ namespace vad_core.WaveProcessor
             }
             catch (FormatException)
             {
-                //MessageBox.Show("Ошибка чтения заголовков файла", "",
-                //MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //handle
             }
             catch (Exception)
             {
-
+                //handle
             }
 
         }
