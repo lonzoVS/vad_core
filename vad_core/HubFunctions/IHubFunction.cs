@@ -8,6 +8,6 @@ namespace vad_core.HubFunctions
 {
     public interface IHubFunction
     {
-        void SendToHub<T>(IConnectionManager connectionManager, T arg);
+        void SendToHub<T>(T arg, string clientInfo);
     }
 }

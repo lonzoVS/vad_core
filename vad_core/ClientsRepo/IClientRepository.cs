@@ -6,12 +6,12 @@ using vad_core.Models;
 
 namespace vad_core.ClientsRepo
 {
-    public interface IClientRepository : IEnumerable<KeyValuePair<Tuple<string, string>, Client>>
+    public interface IClientRepository : IEnumerable<KeyValuePair<string, Client>>
     {
-        void AddClient(Tuple<string, string> info, Client client);
+        void AddClient(string info, Client client);
         void DeleteClient(string client);
-        string GetId(string ip, string hub);
-        string GetName(string ip, string hub);
+        string GetId(string ip);
+        string GetName(string ip);
         
     }
 }

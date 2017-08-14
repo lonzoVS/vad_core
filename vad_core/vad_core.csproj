@@ -17,6 +17,7 @@
     <Content Include="wwwroot\css\loading-bar.css" />
     <Content Include="wwwroot\css\vad_core.min.css" />
     <Content Include="wwwroot\js\fileUploader.js" />
+    <Content Include="wwwroot\js\visualizationhub.js" />
     <Content Include="wwwroot\js\progressbarhub.js" />
     <Content Include="wwwroot\js\loading-bar.js" />
   </ItemGroup>

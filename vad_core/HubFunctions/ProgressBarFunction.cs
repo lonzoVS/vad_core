@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace vad_core.HubFunctions
 {
-    public class ProgressBarFunction
+    public class ProgressBarFunction : IHubFunction
     {
         private IHubContext hubContext;
 
@@ -18,11 +18,8 @@ namespace vad_core.HubFunctions
             this.hubContext = hubContext;
         }
 
-        public void SendToHubClient<T>(T arg, string user)
+        public void SendToHub<T>(T arg, string user)
         {
-              //var conId = con.Select(s => s.Key).Where(s => s == "lul1");
-           // var hubContext = connectionManager.GetHubContext<ProgressHub>();
-            //need to add map for clients wiht id and somethings else(ip maybe) to send to a caller not to all(singleton ???) retarded.
             hubContext.Clients.Client(user).AddProgress(arg);
         }
 
