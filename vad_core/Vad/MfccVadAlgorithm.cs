@@ -11,7 +11,7 @@ namespace vad_core.Vad
     public class MfccVadAlgorithm : IVadAlgorithm
     {
         public double[] VadList { get; set; }
-        public double p = 0.99999999999999;
+        private double p = 0.99999999999999;
         public List<IMask> Masks { get; set; } = new List<IMask>();
         private int mfccSize;
         private int freq;

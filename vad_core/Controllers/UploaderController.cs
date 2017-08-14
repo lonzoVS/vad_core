@@ -36,7 +36,7 @@ namespace vad_core.Controllers
             long totalBytes = files.Length;
             var hubContext = connectionManager.GetHubContext<ProgressHub>();
             var ip = HttpContext.Features.Get<IHttpConnectionFeature>()?.RemoteIpAddress?.ToString();
-            var connectionId = RepositoryIsolator.Of.Clients.GetId(ip);
+            var connectionId = RepositoryIsolator.Of.Clients.GetId(ip, "progress");
             string filename = ContentDispositionHeaderValue.Parse(files.ContentDisposition).FileName.Trim('"');
 
             filename = this.EnsureCorrectFilename(filename);

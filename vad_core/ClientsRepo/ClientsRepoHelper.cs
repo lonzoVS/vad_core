@@ -16,9 +16,9 @@ namespace vad_core.ClientsRepo
             this.clients = clients;
         }
 
-        public void Add(string ip, Client client)
+        public void Add(Tuple<string, string> info, Client client)
         {
-            clients.AddClient(ip, client);
+            clients.AddClient(info, client);
         }
 
         public void Delete(string clientInfo)

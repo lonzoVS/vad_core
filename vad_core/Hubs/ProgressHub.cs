@@ -17,12 +17,13 @@ namespace vad_core.Hubs
     [HubName("progressHub")]
     public class ProgressHub : Hub
     {
+       
 
         public override Task OnConnected()
         {
             var ip = Context.Request.HttpContext.Connection.RemoteIpAddress.ToString();
             var clients = new ClientsRepoHelper(RepositoryIsolator.Of.Clients);
-            clients.Add(ip, new Client(Context.ConnectionId, Context.User.Identity.Name));
+            clients.Add(Tuple.Create(ip,"progress"), new Client(Context.ConnectionId, Context.User.Identity.Name));
             System.Diagnostics.Debug.WriteLine(clients.Count());
             return base.OnConnected();
         }
