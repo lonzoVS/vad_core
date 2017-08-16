@@ -39,6 +39,7 @@ namespace vad_core.Controllers
             var connectionId = RepositoryIsolator.Of.Clients.GetId(ip);
             int percentage = 0;
             sendProgress.SendToHub(percentage, connectionId);
+            GC.Collect();
             return Json("success");
         }
     }

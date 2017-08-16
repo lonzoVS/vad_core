@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 using vad_core.MathStuff;
+using vad_core.MathStuff.DSPHelper;
 using vad_core.Vad.MfccMasks;
 
 namespace vad_core.Vad
@@ -57,29 +58,29 @@ namespace vad_core.Vad
         //computing MFFC from FTT.
         private double[] PrepareMfcc(double[] samples)
         {
-            DSP dsp = new DSP();
+            //DSP dsp = new DSP();
             MFCC mfcc = new MFCC();
             List<double> mfccList = new List<double>();
-            
-           
-            foreach (double[] chunk in samples.Split(256))
+            var spec = new RawFFTVisualization(samples).Compute(true);
+            foreach (double[] chunk in spec.Split(frameLength))
             {
-                double[] windowedFrame = chunk.Multiply(dsp.Windwoing());
-                double[] image = Enumerable.Repeat(0.0, 256).ToArray();
-                double[] spec = new double[256];
-                Complex[] fourierCmplxRaw = new Complex[256];
-                for (int i = 0; i < 256; i++)
-                {
-                    fourierCmplxRaw[i] = new Complex(windowedFrame[i], image[i]);
-                }
-                Complex[] fourierCmplxRaw1 = dsp.Fft(fourierCmplxRaw);
-                for (int i = 0; i < 256; i++)
-                {
-                    spec[i] = fourierCmplxRaw1[i].Magnitude;
-                    image[i] = fourierCmplxRaw1[i].Imaginary;
-                }
-                mfccList.AddRange(mfcc.ExecuteMFCC(spec, mfccSize, freq, freqMin, freqMax, frameLength));
+                //double[] windowedFrame = chunk.Multiply(dsp.Windwoing());
+                //double[] image = Enumerable.Repeat(0.0, 256).ToArray();
+                //double[] spec = new double[256];
+                //Complex[] fourierCmplxRaw = new Complex[256];
+                //for (int i = 0; i < 256; i++)
+                //{
+                //    fourierCmplxRaw[i] = new Complex(windowedFrame[i], image[i]);
+                //}
+                //Complex[] fourierCmplxRaw1 = dsp.Fft(fourierCmplxRaw);
+                //for (int i = 0; i < 256; i++)
+                //{
+                //    spec[i] = fourierCmplxRaw1[i].Magnitude;
+                //    image[i] = fourierCmplxRaw1[i].Imaginary;
+                //}
+                mfccList.AddRange(mfcc.ExecuteMFCC(chunk, mfccSize, freq, freqMin, freqMax, frameLength));
             }
+            
             return mfccList.ToArray();
 
         }
